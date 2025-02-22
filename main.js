@@ -1,18 +1,29 @@
 
-// recursion function
+//Получаем доступ к єлементам 
+const $InputMax = document.getElementById("inputMaxValue");
+const $inputMin = document.getElementById("inputMinValue");
 
-function randomInteger(min , max){
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
+// создаем функцию которая  рисует пирамиду, рекурсивно создавая уровни.
 
-let s1 = 0;
-
-function getMoneyRecursion(){
-    let random = randomInteger(0, 100);
-    console.log(random);
-    if(random <= 90){
-        getMoneyRecursion()
+function createPyramid(levels , parentElement , minValue, maxValue){
+    //услови прекращение работы функции
+    if(levels === 0){
+        return
     }
-}
 
-getMoneyRecursion()
+    // количество блоков
+    const blocksCount = Math.floor(Math.random() * (maxValue - minValue) + minValue)
+
+     //получаем доступ к pyramid
+     const $pyramid = document.getElementById("pyramid");
+
+     //цыкл для создания блоков
+     for(let i = 0; i < blocksCount; i++){
+        const block = document.createElement("block")
+        block.classList.add("block")
+        $pyramid.appendChild(block)
+     }
+
+     //выводим следующий ряд
+     createPyramid(levels -1, parentElement,minValue,maxValue)
+}
